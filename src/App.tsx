@@ -1,4 +1,5 @@
 import { styled } from './stitches.config.ts'
+import { Reader } from './components/Reader'
 
 const Main = styled('main', {
   minHeight: '100vh',
@@ -108,22 +109,6 @@ const PrimaryButton = styled('button', {
   },
 })
 
-const ReaderSlot = styled('div', {
-  marginTop: '$8',
-  width: '100%',
-  maxWidth: '$readerMax',
-  backgroundColor: '$bgReader',
-  color: '$textReader',
-  borderRadius: '$lg',
-  padding: '$6',
-  boxShadow: '$readerPaper',
-  textAlign: 'left',
-  fontFamily: '$literary',
-  fontSize: '$base',
-  lineHeight: '$literary',
-  border: '1px solid rgba(0, 0, 0, 0.08)',
-})
-
 export default function App() {
   return (
     <Main>
@@ -139,13 +124,10 @@ export default function App() {
           </PrimaryButton>
         </ActionGroup>
 
-        {/* Emplacement prêt pour le Hero littéraire & liseuse */}
-        <ReaderSlot>
-          <p>
-            Surface de lecture prête pour l&apos;immersion narrative.
-          </p>
-        </ReaderSlot>
+        {/* Liseuse immersive interactive */}
+        <Reader />
       </HeroSection>
     </Main>
   )
 }
+
