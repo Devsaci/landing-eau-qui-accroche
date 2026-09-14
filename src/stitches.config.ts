@@ -114,6 +114,9 @@ export const globalStyles = globalCss({
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
   },
+  html: {
+    scrollBehavior: 'smooth',
+  },
   'html, body': {
     margin: 0,
     padding: 0,
@@ -124,6 +127,9 @@ export const globalStyles = globalCss({
     lineHeight: '$normal',
     overscrollBehavior: 'none',
     WebkitTapHighlightColor: 'transparent',
+  },
+  'section[id], div[id]': {
+    scrollMarginTop: '80px',
   },
   '#root': {
     minHeight: '100%',

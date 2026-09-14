@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { styled } from './stitches.config.ts'
 import { Reader } from './components/Reader'
 import heroArt from './assets/port-mystral-art.jpg'
@@ -899,6 +900,16 @@ const FooterBottomBar = styled('div', {
    ========================================================================== */
 
 export default function App() {
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash) {
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [])
+
   return (
     <PageWrapper>
       {/* 1. HEADER (Fixe / Flouté) */}
