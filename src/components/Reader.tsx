@@ -43,23 +43,29 @@ const Toolbar = styled('header', {
   padding: '$4 $5',
   borderBottom: '1px solid',
   transition: 'border-color 300ms ease, background-color 300ms ease',
+  position: 'sticky',
+  top: '72px', /* S'aligne juste en dessous du HeaderNav (72px) */
+  zIndex: 40,  /* Reste au-dessus du texte du reader sans masquer le HeaderNav */
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
 
   '@bp2': {
     padding: '$5 $7',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    top: '72px',
   },
 
   variants: {
     themeMode: {
       paper: {
-        backgroundColor: 'rgba(244, 240, 232, 0.55)',
-        borderBottomColor: 'rgba(30, 41, 59, 0.08)',
+        backgroundColor: 'rgba(253, 251, 247, 0.85)',
+        borderBottomColor: 'rgba(30, 41, 59, 0.1)',
       },
       dark: {
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
-        borderBottomColor: 'rgba(255, 255, 255, 0.07)',
+        backgroundColor: 'rgba(15, 23, 42, 0.85)',
+        borderBottomColor: 'rgba(255, 255, 255, 0.1)',
       },
     },
   },
@@ -132,10 +138,16 @@ const ReadingBadge = styled('span', {
 })
 
 const ControlsGroup = styled('div', {
-  display: 'inline-flex',
+  display: 'flex',
   alignItems: 'center',
   gap: '$3',
   flexWrap: 'wrap',
+  width: '100%',
+  
+  '@bp2': {
+    width: 'auto',
+    justifyContent: 'flex-end',
+  }
 })
 
 const ControlSegment = styled('div', {
