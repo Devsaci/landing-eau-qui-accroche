@@ -26,8 +26,8 @@ const ReaderContainer = styled('article', {
       dark: {
         backgroundColor: '#0F172A',
         color: '#E2E8F0',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        boxShadow: '0 24px 50px -15px rgba(0, 0, 0, 0.75), 0 0 35px -5px rgba(15, 118, 110, 0.22)',
+        border: '1px solid rgba(249, 115, 22, 0.25)',
+        boxShadow: '0 24px 50px -15px rgba(0, 0, 0, 0.75), 0 0 35px -5px rgba(249, 115, 22, 0.15)',
       },
     },
   },
@@ -91,7 +91,7 @@ const ChapterTitle = styled('span', {
         color: '#0F766E',
       },
       dark: {
-        color: '$accentWaterGlow',
+        color: '$accentCopper',
       },
     },
   },
@@ -120,9 +120,9 @@ const ReadingBadge = styled('span', {
         border: '1px solid rgba(15, 118, 110, 0.18)',
       },
       dark: {
-        backgroundColor: 'rgba(20, 184, 166, 0.12)',
-        color: '#2DD4BF',
-        border: '1px solid rgba(20, 184, 166, 0.25)',
+        backgroundColor: 'rgba(249, 115, 22, 0.12)',
+        color: '$accentCopper',
+        border: '1px solid rgba(249, 115, 22, 0.28)',
       },
     },
   },
@@ -221,7 +221,7 @@ const ActionButton = styled('button', {
       active: true,
       css: {
         backgroundColor: '#1E293B',
-        color: '#2DD4BF',
+        color: '$accentCopper',
         fontWeight: '$bold',
       },
     },
@@ -259,7 +259,8 @@ const ContentArea = styled('div', {
   padding: '$6 $5',
   fontFamily: '$literary',
   lineHeight: '1.85',
-  transition: 'font-size 250ms ease',
+  color: 'inherit',
+  transition: 'color 300ms ease, font-size 250ms ease',
 
   '@bp2': {
     padding: '$8 $8',
@@ -288,6 +289,8 @@ const Paragraph = styled('p', {
   textAlign: 'justify',
   textJustify: 'inter-word',
   letterSpacing: '0.005em',
+  color: 'inherit',
+  transition: 'color 300ms ease',
 
   '&:last-of-type': {
     margin: 0,
@@ -309,10 +312,11 @@ const DropCap = styled('span', {
   variants: {
     themeMode: {
       paper: {
-        color: '#0F766E',
+        color: '$accentCopper',
       },
       dark: {
-        color: '$accentWaterGlow',
+        color: '$accentCopper',
+        textShadow: '0 0 25px rgba(249, 115, 22, 0.4)',
       },
     },
   },
@@ -325,6 +329,75 @@ const FirstWordCaps = styled('span', {
   fontVariant: 'small-caps',
   letterSpacing: '0.06em',
   fontWeight: '$semibold',
+})
+
+/* Encart télémétrique sombre inséré dans le flux de lecture */
+const TelemetryCallout = styled('aside', {
+  margin: '$6 0',
+  padding: '$4 $5',
+  borderRadius: '$md',
+  backgroundColor: '#090D16',
+  border: '1px solid rgba(249, 115, 22, 0.35)',
+  boxShadow: 'inset 0 0 25px rgba(0, 0, 0, 0.7), 0 6px 20px rgba(0, 0, 0, 0.45)',
+  fontFamily: '$mono',
+  color: '$textPrimary',
+})
+
+const TelemetryHead = styled('div', {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: '$2',
+  paddingBottom: '$2',
+  borderBottom: '1px solid rgba(249, 115, 22, 0.2)',
+  fontSize: '0.68rem',
+  letterSpacing: '$widest',
+  textTransform: 'uppercase',
+})
+
+const TelemetryTitle = styled('span', {
+  color: '$accentCopper',
+  fontWeight: '$bold',
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '6px',
+})
+
+const TelemetrySensor = styled('span', {
+  color: '$textMuted',
+  fontSize: '0.65rem',
+})
+
+const TelemetryGrid = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gap: '$3',
+  paddingTop: '$3',
+
+  '@bp1': {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+  },
+})
+
+const TelemetryItem = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2px',
+})
+
+const TelemetryLabel = styled('span', {
+  fontSize: '0.6rem',
+  color: '$textMuted',
+  textTransform: 'uppercase',
+  letterSpacing: '$wide',
+})
+
+const TelemetryValue = styled('span', {
+  fontSize: '$xs',
+  fontWeight: '$bold',
+  color: '#FFFFFF',
+  letterSpacing: '0.02em',
 })
 
 const Separator = styled('div', {
@@ -401,17 +474,18 @@ const ContinueButton = styled('button', {
         },
       },
       dark: {
-        backgroundColor: '#0F766E',
-        color: '#F1F5F9',
-        borderColor: 'rgba(20, 184, 166, 0.45)',
-        boxShadow: '$waterAura',
+        backgroundColor: '$accentCopper',
+        color: '#FFFFFF',
+        borderColor: 'rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 4px 20px rgba(249, 115, 22, 0.35)',
         '&:hover': {
-          backgroundColor: '#14B8A6',
-          color: '#042F2E',
-          boxShadow: '$waterGlow',
+          backgroundColor: '#EA580C',
+          color: '#FFFFFF',
+          boxShadow: '0 6px 28px rgba(249, 115, 22, 0.55)',
           transform: 'translateY(-1px)',
         },
       },
+
     },
   },
   defaultVariants: {
@@ -535,6 +609,33 @@ export function Reader() {
           à intervalles réguliers une luminescence bleu-vert insaisissable, un réseau de filaments microscopiques qui
           semblait tisser des liens invisibles entre chaque goutte d’eau captive.
         </Paragraph>
+
+        {/* Encart télémétrique sombre inséré entre les paragraphes */}
+        <TelemetryCallout aria-label="Relevé télémétrique de l'anomalie">
+          <TelemetryHead>
+            <TelemetryTitle>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              <span>RELEVÉ TÉLÉMÉTRIQUE LABO #07 • PHARE NORD</span>
+            </TelemetryTitle>
+            <TelemetrySensor>CAPTEUR PIÉZOÉLECTRIQUE — CALIBRÉ</TelemetrySensor>
+          </TelemetryHead>
+          <TelemetryGrid>
+            <TelemetryItem>
+              <TelemetryLabel>DENSITÉ VOLUMIQUE (ρ = m/V)</TelemetryLabel>
+              <TelemetryValue>ρ = 1.052 g/cm³ [ANOMALIE]</TelemetryValue>
+            </TelemetryItem>
+            <TelemetryItem>
+              <TelemetryLabel>TEMPÉRATURE ÉCHANTILLON</TelemetryLabel>
+              <TelemetryValue>10.0 °C (ISOTHERME)</TelemetryValue>
+            </TelemetryItem>
+            <TelemetryItem>
+              <TelemetryLabel>RÉSONANCE ACOUSTIQUE</TelemetryLabel>
+              <TelemetryValue>14.82 Hz (INFRASONORE)</TelemetryValue>
+            </TelemetryItem>
+          </TelemetryGrid>
+        </TelemetryCallout>
 
         <Paragraph>
           Ce soir-là, tandis que la brume marine avalait peu à peu les feux de détresse de la côte, Luna approcha la flamme
