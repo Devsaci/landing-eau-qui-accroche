@@ -138,19 +138,89 @@ const BrandSubtitle = styled('span', {
   textTransform: 'uppercase',
 })
 
-const NavLinks = styled('nav', {
+const MobileMenuCheckbox = styled('input', {
   display: 'none',
-  alignItems: 'center',
-  gap: '$6',
+})
+
+const MobileMenuLabel = styled('label', {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  width: '28px',
+  height: '20px',
+  cursor: 'pointer',
+  zIndex: 101, 
+  marginLeft: 'auto',
 
   '@bp3': {
+    display: 'none',
+  },
+
+  'span': {
+    display: 'block',
+    height: '2px',
+    width: '100%',
+    backgroundColor: '$textPrimary',
+    borderRadius: '2px',
+    transition: 'all 0.3s ease',
+    transformOrigin: 'center',
+  },
+
+  [`${MobileMenuCheckbox}:checked + & span:nth-child(1)`]: {
+    transform: 'translateY(9px) rotate(45deg)',
+  },
+  [`${MobileMenuCheckbox}:checked + & span:nth-child(2)`]: {
+    opacity: 0,
+  },
+  [`${MobileMenuCheckbox}:checked + & span:nth-child(3)`]: {
+    transform: 'translateY(-9px) rotate(-45deg)',
+  },
+})
+
+const NavLinks = styled('nav', {
+  // Mobile layout
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  width: '100%',
+  backgroundColor: 'rgba(15, 23, 42, 0.95)',
+  backdropFilter: 'blur(20px)',
+  WebkitBackdropFilter: 'blur(20px)',
+  paddingTop: '100px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '$8',
+  transform: 'translateX(100%)',
+  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  zIndex: 90,
+
+  [`${MobileMenuCheckbox}:checked ~ &`]: {
+    transform: 'translateX(0)',
+  },
+
+  '@bp3': {
+    // Desktop layout
+    position: 'static',
+    width: 'auto',
+    backgroundColor: 'transparent',
+    backdropFilter: 'none',
+    WebkitBackdropFilter: 'none',
+    paddingTop: 0,
     display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '$6',
+    transform: 'none',
+    transition: 'none',
+    zIndex: 'auto',
   },
 })
 
 const NavLink = styled('a', {
   fontFamily: '$ui',
-  fontSize: '$sm',
+  fontSize: '$lg',
   fontWeight: '$medium',
   color: '$textMuted',
   textDecoration: 'none',
@@ -168,10 +238,14 @@ const NavLink = styled('a', {
       },
     },
   },
+
+  '@bp3': {
+    fontSize: '$sm',
+  },
 })
 
 const HeaderAction = styled('a', {
-  display: 'inline-flex',
+  display: 'none', // Hidden on mobile
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '$accentCopper',
@@ -191,6 +265,10 @@ const HeaderAction = styled('a', {
     backgroundColor: '#EA580C',
     boxShadow: '0 4px 20px rgba(249, 115, 22, 0.55)',
     transform: 'translateY(-1px)',
+  },
+
+  '@bp3': {
+    display: 'inline-flex',
   },
 })
 
@@ -914,6 +992,9 @@ export default function App() {
 
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
+    // Fermeture du menu mobile sans état React (via le checkbox)
+    const toggle = document.getElementById('mobile-menu-toggle') as HTMLInputElement;
+    if (toggle) toggle.checked = false;
   };
 
   useEffect(() => {
@@ -980,6 +1061,13 @@ export default function App() {
             <BrandTitle>L&apos;EAU QUI ACCROCHE</BrandTitle>
             <BrandSubtitle>LA VÉRITÉ SOUS LA SURFACE</BrandSubtitle>
           </BrandBlock>
+
+          <MobileMenuCheckbox type="checkbox" id="mobile-menu-toggle" aria-label="Ouvrir le menu" />
+          <MobileMenuLabel htmlFor="mobile-menu-toggle">
+            <span />
+            <span />
+            <span />
+          </MobileMenuLabel>
 
           <NavLinks role="navigation" aria-label="Navigation principale">
             <NavLink 
