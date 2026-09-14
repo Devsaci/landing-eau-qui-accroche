@@ -149,7 +149,7 @@ const MobileMenuLabel = styled('label', {
   width: '28px',
   height: '20px',
   cursor: 'pointer',
-  zIndex: 101, 
+  zIndex: 1100, 
   marginLeft: 'auto',
 
   '@bp2': {
@@ -182,13 +182,11 @@ const NavLinks = styled('nav', {
   position: 'fixed',
   top: 0,
   right: 0,
-  bottom: 0,
+  height: '100vh',
   width: '300px',
-  maxWidth: '100%',
-  backgroundColor: 'rgba(15, 23, 42, 0.95)',
-  backdropFilter: 'blur(20px)',
-  WebkitBackdropFilter: 'blur(20px)',
-  paddingTop: '100px',
+  maxWidth: '100vw',
+  backgroundColor: '#0d121f',
+  paddingTop: '6rem',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -197,7 +195,7 @@ const NavLinks = styled('nav', {
   opacity: 0,
   visibility: 'hidden',
   transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s 0.3s',
-  zIndex: 90,
+  zIndex: 1000,
   borderLeft: '1px solid $borderSubtle',
 
   [`${MobileMenuCheckbox}:checked ~ &`]: {
