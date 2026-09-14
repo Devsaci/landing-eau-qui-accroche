@@ -12,25 +12,18 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      // Ambiance sensorielle
-      bgBase: '#0B1120',          // Fond ardoise profonde
-      bgSurface: '#1E293B',       // Surface minérale granit
-      bgSurfaceElevated: '#334155',
-      accentWater: '#0F766E',     // Accent aqueux visqueux
-      accentWaterGlow: '#14B8A6', // Éclat aqueux
-      accentWaterDeep: '#042F2E', // Profondeurs abyssales
-      textPrimary: '#F1F5F9',     // Texte principal contrasté
-      textMuted: '#94A3B8',       // Texte adouci
-      textSubtle: '#64748B',      // Texte estompé
-      bgReader: '#F8F9FA',        // Surface de liseuse
-      textReader: '#1E293B',      // Encre liseuse
-      borderSubtle: 'rgba(241, 245, 249, 0.08)',
-      borderFocus: '#0F766E',
+      bgPrimary: '#0F172A',       // Bleu Ardoise / Granit
+      bgOcean: '#0E3A36',         // Vert Océan Profond
+      textPrimary: '#F8FAFC',     // Blanc Écume / Sel
+      textMuted: '#64748B',       // Gris Zinc / Brume
+      accentCopper: '#F97316',    // Orange Cuivre / 15 Hz
+      borderSubtle: 'rgba(100, 116, 139, 0.25)',
+      cardGlass: 'rgba(15, 23, 42, 0.75)',
     },
     fonts: {
-      ui: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-      literary: "'Merriweather', Georgia, Cambria, 'Times New Roman', serif",
-      mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      literary: "'Merriweather', Georgia, serif",
+      ui: "'Inter', system-ui, sans-serif",
+      mono: "'JetBrains Mono', monospace",
     },
     fontSizes: {
       xs: '0.75rem',
@@ -125,7 +118,7 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     height: '100%',
-    backgroundColor: '$bgBase',
+    backgroundColor: '$bgPrimary',
     color: '$textPrimary',
     fontFamily: '$ui',
     lineHeight: '$normal',
@@ -146,7 +139,7 @@ export const globalStyles = globalCss({
     touchAction: 'manipulation',
   },
   ':focus-visible': {
-    outline: '2px solid $accentWaterGlow',
+    outline: '2px solid $accentCopper',
     outlineOffset: '3px',
   },
   '@media (prefers-reduced-motion: reduce)': {
