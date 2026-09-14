@@ -152,7 +152,7 @@ const MobileMenuLabel = styled('label', {
   zIndex: 101, 
   marginLeft: 'auto',
 
-  '@bp3': {
+  '@bp2': {
     display: 'none',
   },
 
@@ -183,7 +183,8 @@ const NavLinks = styled('nav', {
   top: 0,
   right: 0,
   bottom: 0,
-  width: '100%',
+  width: '300px',
+  maxWidth: '100%',
   backgroundColor: 'rgba(15, 23, 42, 0.95)',
   backdropFilter: 'blur(20px)',
   WebkitBackdropFilter: 'blur(20px)',
@@ -193,17 +194,24 @@ const NavLinks = styled('nav', {
   alignItems: 'center',
   gap: '$8',
   transform: 'translateX(100%)',
-  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  opacity: 0,
+  visibility: 'hidden',
+  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s 0.3s',
   zIndex: 90,
+  borderLeft: '1px solid $borderSubtle',
 
   [`${MobileMenuCheckbox}:checked ~ &`]: {
     transform: 'translateX(0)',
+    opacity: 1,
+    visibility: 'visible',
+    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s',
   },
 
-  '@bp3': {
+  '@bp2': {
     // Desktop layout
     position: 'static',
     width: 'auto',
+    maxWidth: 'none',
     backgroundColor: 'transparent',
     backdropFilter: 'none',
     WebkitBackdropFilter: 'none',
@@ -213,8 +221,11 @@ const NavLinks = styled('nav', {
     alignItems: 'center',
     gap: '$6',
     transform: 'none',
+    opacity: 1,
+    visibility: 'visible',
     transition: 'none',
     zIndex: 'auto',
+    borderLeft: 'none',
   },
 })
 
@@ -239,7 +250,7 @@ const NavLink = styled('a', {
     },
   },
 
-  '@bp3': {
+  '@bp2': {
     fontSize: '$sm',
   },
 })
@@ -267,7 +278,7 @@ const HeaderAction = styled('a', {
     transform: 'translateY(-1px)',
   },
 
-  '@bp3': {
+  '@bp2': {
     display: 'inline-flex',
   },
 })
@@ -1069,7 +1080,7 @@ export default function App() {
             <span />
           </MobileMenuLabel>
 
-          <NavLinks role="navigation" aria-label="Navigation principale">
+          <NavLinks className="sidebar" role="navigation" aria-label="Navigation principale">
             <NavLink 
               href="#univers" 
               onClick={() => handleNavClick('univers')}
