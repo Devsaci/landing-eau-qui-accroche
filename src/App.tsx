@@ -923,6 +923,7 @@ export default function App() {
           <NavLinks role="navigation" aria-label="Navigation principale">
             <NavLink href="#univers">L&apos;Univers</NavLink>
             <NavLink href="#enquete">Enquête</NavLink>
+            <NavLink href="#protagonistes">Protagonistes</NavLink>
             <NavLink href="#liseuse">Liseuse PWA</NavLink>
             <NavLink href="#capteurs">Données &amp; Capteurs</NavLink>
           </NavLinks>
@@ -1104,7 +1105,7 @@ export default function App() {
       </ReaderSectionWrapper>
 
       {/* 5. CHARACTERS SECTION (Les protagonistes) */}
-      <CharactersSectionWrapper id="enquete" aria-labelledby="characters-title">
+      <CharactersSectionWrapper id="protagonistes" aria-labelledby="characters-title">
         <SectionContainer>
           <CharactersHeader>
             <SectionEyebrow>Dramatis Personae</SectionEyebrow>
@@ -1210,7 +1211,7 @@ export default function App() {
               <FooterHeading>Exploration</FooterHeading>
               <FooterLinkList>
                 <li><FooterAnchor href="#univers">L&apos;Univers &amp; Piliers</FooterAnchor></li>
-                <li><FooterAnchor href="#enquete">Les Protagonistes</FooterAnchor></li>
+                <li><FooterAnchor href="#protagonistes">Les Protagonistes</FooterAnchor></li>
                 <li><FooterAnchor href="#liseuse">Liseuse PWA Interactive</FooterAnchor></li>
                 <li><FooterAnchor href="#capteurs">Télémétrie en Direct</FooterAnchor></li>
               </FooterLinkList>
