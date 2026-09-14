@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { styled } from './stitches.config.ts'
 import { Reader } from './components/Reader'
 import heroArt from './assets/port-mystral-art.jpg'
@@ -37,6 +37,7 @@ const SectionHeader = styled('header', {
   flexDirection: 'column',
   alignItems: 'center',
   gap: '$3',
+  scrollMarginTop: '80px',
 })
 
 const SectionEyebrow = styled('span', {
@@ -58,6 +59,7 @@ const SectionTitle = styled('h2', {
   letterSpacing: '$tight',
   color: '$textPrimary',
   lineHeight: '$tight',
+  scrollMarginTop: '80px',
 
   '@bp2': {
     fontSize: '$4xl',
@@ -157,6 +159,14 @@ const NavLink = styled('a', {
 
   '&:hover': {
     color: '$textPrimary',
+  },
+  variants: {
+    active: {
+      true: {
+        color: '#F97316',
+        borderBottom: '2px solid #F97316',
+      },
+    },
   },
 })
 
@@ -900,6 +910,57 @@ const FooterBottomBar = styled('div', {
    ========================================================================== */
 
 export default function App() {
+  const [activeSection, setActiveSection] = useState<string>('')
+
+  const handleNavClick = (sectionId: string) => {
+    setActiveSection(sectionId);
+  };
+
+  useEffect(() => {
+    const sectionIds = ['hero', 'univers', 'protagonistes', 'liseuse', 'capteurs'];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // 1. Filtrer uniquement les sections en intersection
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+
+        // 2. Trier par ratio d'intersection décroissant (la plus visible gagne)
+        visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        const activeId = visible[0].target.id;
+
+        if (activeId === 'hero') {
+          setActiveSection('');
+        } else {
+          setActiveSection(activeId);
+        }
+      },
+      {
+        // Zone d'observation équilibrée
+        rootMargin: '-80px 0px -30% 0px',
+        threshold: [0.1, 0.3, 0.6],
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Écouteur de sécurité pour le sommet absolu de la page
+    const handleScrollTop = () => {
+      if ((window.scrollY || window.pageYOffset) < 150) {
+        setActiveSection('');
+      }
+    };
+    window.addEventListener('scroll', handleScrollTop, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScrollTop);
+    };
+  }, []);
+
   useEffect(() => {
     const hash = window.location.hash
     if (hash) {
@@ -915,17 +976,60 @@ export default function App() {
       {/* 1. HEADER (Fixe / Flouté) */}
       <HeaderNav role="banner">
         <HeaderInner>
-          <BrandBlock href="#hero" aria-label="Retour à l'accueil">
+          <BrandBlock href="#hero" aria-label="Retour à l'accueil" onClick={() => handleNavClick('')}>
             <BrandTitle>L&apos;EAU QUI ACCROCHE</BrandTitle>
             <BrandSubtitle>LA VÉRITÉ SOUS LA SURFACE</BrandSubtitle>
           </BrandBlock>
 
           <NavLinks role="navigation" aria-label="Navigation principale">
-            <NavLink href="#univers">L&apos;Univers</NavLink>
-            <NavLink href="#enquete">Enquête</NavLink>
-            <NavLink href="#protagonistes">Protagonistes</NavLink>
-            <NavLink href="#liseuse">Liseuse PWA</NavLink>
-            <NavLink href="#capteurs">Données &amp; Capteurs</NavLink>
+            <NavLink 
+              href="#univers" 
+              onClick={() => handleNavClick('univers')}
+              active={activeSection === 'univers'}
+              style={{
+                color: activeSection === 'univers' ? '#F97316' : undefined,
+                borderBottom: activeSection === 'univers' ? '2px solid #F97316' : '2px solid transparent',
+                fontWeight: activeSection === 'univers' ? 600 : 500,
+                paddingBottom: '4px',
+                transition: 'all 0.2s ease',
+              }}
+            >L&apos;Univers</NavLink>
+            <NavLink 
+              href="#protagonistes" 
+              onClick={() => handleNavClick('protagonistes')}
+              active={activeSection === 'protagonistes'}
+              style={{
+                color: activeSection === 'protagonistes' ? '#F97316' : undefined,
+                borderBottom: activeSection === 'protagonistes' ? '2px solid #F97316' : '2px solid transparent',
+                fontWeight: activeSection === 'protagonistes' ? 600 : 500,
+                paddingBottom: '4px',
+                transition: 'all 0.2s ease',
+              }}
+            >Protagonistes</NavLink>
+            <NavLink 
+              href="#liseuse" 
+              onClick={() => handleNavClick('liseuse')}
+              active={activeSection === 'liseuse'}
+              style={{
+                color: activeSection === 'liseuse' ? '#F97316' : undefined,
+                borderBottom: activeSection === 'liseuse' ? '2px solid #F97316' : '2px solid transparent',
+                fontWeight: activeSection === 'liseuse' ? 600 : 500,
+                paddingBottom: '4px',
+                transition: 'all 0.2s ease',
+              }}
+            >Liseuse PWA</NavLink>
+            <NavLink 
+              href="#capteurs" 
+              onClick={() => handleNavClick('capteurs')}
+              active={activeSection === 'capteurs'}
+              style={{
+                color: activeSection === 'capteurs' ? '#F97316' : undefined,
+                borderBottom: activeSection === 'capteurs' ? '2px solid #F97316' : '2px solid transparent',
+                fontWeight: activeSection === 'capteurs' ? 600 : 500,
+                paddingBottom: '4px',
+                transition: 'all 0.2s ease',
+              }}
+            >Données &amp; Capteurs</NavLink>
           </NavLinks>
 
           <HeaderAction href="#liseuse">
@@ -1057,54 +1161,10 @@ export default function App() {
               <PillarTag>Onde acoustique 15 Hz • Tension de surface</PillarTag>
             </PillarCard>
           </PillarsGrid>
-
-          {/* Bandeau télémétrique sous les cartes */}
-          <TelemetryStrip id="capteurs">
-            <TelemetryStripMeta>
-              <PulsingIndicator aria-hidden="true" />
-              <span>FRÉQUENCE ENREGISTRÉE : <TelemetryHighlight>15.12 HZ</TelemetryHighlight></span>
-              <span>•</span>
-              <span style={{ color: '#64748B' }}>CAPTEUR HYDRO-PHONIQUE EN IMMERSION (-24M)</span>
-            </TelemetryStripMeta>
-
-            <WaveSvg viewBox="0 0 460 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Signal sinusoïdal de l'onde 15 Hz">
-              <path
-                d="M 0 18 Q 28 0, 57 18 T 114 18 T 171 18 T 228 18 T 285 18 T 342 18 T 400 18 T 460 18"
-                stroke="#F97316"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M 0 18 Q 28 6, 57 18 T 114 18 T 171 18 T 228 18 T 285 18 T 342 18 T 400 18 T 460 18"
-                stroke="#64748B"
-                strokeWidth="1"
-                strokeDasharray="4 4"
-                fill="none"
-                opacity="0.5"
-              />
-            </WaveSvg>
-          </TelemetryStrip>
         </SectionContainer>
       </PillarsSectionWrapper>
 
-      {/* 4. READER SECTION (Démonstrateur Liseuse PWA) */}
-      <ReaderSectionWrapper id="liseuse" aria-labelledby="reader-title">
-        <SectionContainer>
-          <SectionHeader>
-            <SectionEyebrow>Expérience de Lecture</SectionEyebrow>
-            <SectionTitle id="reader-title">Démonstrateur Liseuse PWA</SectionTitle>
-            <SectionSubtitle>
-              Plongez directement dans le premier chapitre. Ajustez la typographie, basculez entre les ambiances
-              Papier et Nuit Océanique, et observez les relevés de laboratoire en temps réel.
-            </SectionSubtitle>
-          </SectionHeader>
-
-          {/* Composant Reader avec encart télémétrique intégré */}
-          <Reader />
-        </SectionContainer>
-      </ReaderSectionWrapper>
-
-      {/* 5. CHARACTERS SECTION (Les protagonistes) */}
+      {/* 4. CHARACTERS SECTION (Les protagonistes) */}
       <CharactersSectionWrapper id="protagonistes" aria-labelledby="characters-title">
         <SectionContainer>
           <CharactersHeader>
@@ -1165,6 +1225,54 @@ export default function App() {
         </SectionContainer>
       </CharactersSectionWrapper>
 
+      {/* 5. READER SECTION (Démonstrateur Liseuse PWA) */}
+      <ReaderSectionWrapper id="liseuse" aria-labelledby="reader-title">
+        <SectionContainer>
+          <SectionHeader>
+            <SectionEyebrow>Expérience de Lecture</SectionEyebrow>
+            <SectionTitle id="reader-title">Démonstrateur Liseuse PWA</SectionTitle>
+            <SectionSubtitle>
+              Plongez directement dans le premier chapitre. Ajustez la typographie, basculez entre les ambiances
+              Papier et Nuit Océanique, et observez les relevés de laboratoire en temps réel.
+            </SectionSubtitle>
+          </SectionHeader>
+
+          {/* Composant Reader avec encart télémétrique intégré */}
+          <Reader />
+        </SectionContainer>
+      </ReaderSectionWrapper>
+
+      {/* 6. TELEMETRY & CTA SECTION (Capteurs) */}
+      <div id="capteurs" style={{ scrollMarginTop: '100px' }}>
+        <SectionContainer>
+          {/* Bandeau télémétrique */}
+          <TelemetryStrip>
+          <TelemetryStripMeta>
+            <PulsingIndicator aria-hidden="true" />
+            <span>FRÉQUENCE ENREGISTRÉE : <TelemetryHighlight>15.12 HZ</TelemetryHighlight></span>
+            <span>•</span>
+            <span style={{ color: '#64748B' }}>CAPTEUR HYDRO-PHONIQUE EN IMMERSION (-24M)</span>
+          </TelemetryStripMeta>
+
+          <WaveSvg viewBox="0 0 460 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Signal sinusoïdal de l'onde 15 Hz">
+            <path
+              d="M 0 18 Q 28 0, 57 18 T 114 18 T 171 18 T 228 18 T 285 18 T 342 18 T 400 18 T 460 18"
+              stroke="#F97316"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M 0 18 Q 28 6, 57 18 T 114 18 T 171 18 T 228 18 T 285 18 T 342 18 T 400 18 T 460 18"
+              stroke="#64748B"
+              strokeWidth="1"
+              strokeDasharray="4 4"
+              fill="none"
+              opacity="0.5"
+            />
+          </WaveSvg>
+        </TelemetryStrip>
+      </SectionContainer>
+
       {/* 6. CTA SECTION (Rejoindre l'enquête) */}
       <CtaSectionWrapper id="rejoindre" aria-labelledby="cta-title">
         <SectionContainer>
@@ -1193,6 +1301,7 @@ export default function App() {
           </CtaBox>
         </SectionContainer>
       </CtaSectionWrapper>
+      </div>
 
       {/* 7. FOOTER */}
       <FooterWrapper role="contentinfo">
