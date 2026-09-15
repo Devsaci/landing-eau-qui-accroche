@@ -116,9 +116,22 @@ const HeaderInner = styled('div', {
 const BrandBlock = styled('a', {
   textDecoration: 'none',
   display: 'flex',
+  alignItems: 'center',
+  gap: '$3',
+  minHeight: 'auto',
+})
+
+const BrandTextWrapper = styled('div', {
+  display: 'flex',
   flexDirection: 'column',
   gap: '2px',
-  minHeight: 'auto',
+})
+
+const LogoSvg = styled('svg', {
+  width: '36px',
+  height: '36px',
+  flexShrink: 0,
+  filter: 'drop-shadow(0 0 8px rgba(249, 115, 22, 0.4))',
 })
 
 const BrandTitle = styled('span', {
@@ -1067,8 +1080,16 @@ export default function App() {
       <HeaderNav role="banner">
         <HeaderInner>
           <BrandBlock href="#hero" aria-label="Retour à l'accueil" onClick={() => handleNavClick('')}>
-            <BrandTitle>L&apos;EAU QUI ACCROCHE</BrandTitle>
-            <BrandSubtitle>LA VÉRITÉ SOUS LA SURFACE</BrandSubtitle>
+            <LogoSvg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="20" cy="24" r="12" stroke="#64748B" strokeWidth="1" strokeDasharray="4 4" opacity="0.6"/>
+              <circle cx="20" cy="24" r="8" stroke="#64748B" strokeWidth="1" opacity="0.8"/>
+              <path d="M20 6 L26 17 C28 22 26 28 20 28 C14 28 12 22 14 17 Z" fill="rgba(249, 115, 22, 0.15)" stroke="#F97316" strokeWidth="2" strokeLinejoin="round"/>
+              <circle cx="20" cy="22" r="3" fill="#F97316"/>
+            </LogoSvg>
+            <BrandTextWrapper>
+              <BrandTitle>L&apos;EAU QUI ACCROCHE</BrandTitle>
+              <BrandSubtitle>LA VÉRITÉ SOUS LA SURFACE</BrandSubtitle>
+            </BrandTextWrapper>
           </BrandBlock>
 
           <MobileMenuCheckbox type="checkbox" id="mobile-menu-toggle" aria-label="Ouvrir le menu" />
