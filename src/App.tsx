@@ -45,7 +45,7 @@ const SectionEyebrow = styled('span', {
   fontSize: '$xs',
   letterSpacing: '$widest',
   textTransform: 'uppercase',
-  color: '$accentCopper',
+  color: '#CBD5E1',
   fontWeight: '$semibold',
   display: 'inline-flex',
   alignItems: 'center',
@@ -133,7 +133,7 @@ const BrandTitle = styled('span', {
 const BrandSubtitle = styled('span', {
   fontFamily: '$mono',
   fontSize: '0.625rem',
-  color: '$accentCopper',
+  color: '#CBD5E1',
   letterSpacing: '$widest',
   textTransform: 'uppercase',
 })
@@ -348,7 +348,7 @@ const HeroBadge = styled('span', {
   fontWeight: '$semibold',
   letterSpacing: '$wider',
   textTransform: 'uppercase',
-  color: '$accentCopper',
+  color: '#CBD5E1',
   backgroundColor: 'rgba(249, 115, 22, 0.08)',
   border: '1px solid $accentCopper',
   borderRadius: '$sm',
@@ -407,7 +407,7 @@ const TelemetryInline = styled('div', {
 })
 
 const TelemetryHighlight = styled('span', {
-  color: '$accentCopper',
+  color: '#CBD5E1',
   fontWeight: '$semibold',
 })
 
@@ -523,7 +523,7 @@ const BookCoverBadge = styled('div', {
 const BookCoverTag = styled('span', {
   fontFamily: '$mono',
   fontSize: '0.625rem',
-  color: '$accentCopper',
+  color: '#CBD5E1',
   letterSpacing: '$widest',
   textTransform: 'uppercase',
 })
@@ -587,7 +587,7 @@ const PillarNumber = styled('span', {
   fontSize: '$xs',
   fontWeight: '$bold',
   letterSpacing: '$widest',
-  color: '$accentCopper',
+  color: '#CBD5E1',
 })
 
 const PillarTitle = styled('h3', {
@@ -609,7 +609,7 @@ const PillarDescription = styled('p', {
 const PillarTag = styled('div', {
   fontFamily: '$mono',
   fontSize: '0.68rem',
-  color: '$accentCopper',
+  color: '#CBD5E1',
   backgroundColor: 'rgba(249, 115, 22, 0.08)',
   border: '1px solid rgba(249, 115, 22, 0.2)',
   borderRadius: '$sm',
@@ -743,7 +743,7 @@ const CharacterRole = styled('span', {
   fontWeight: '$bold',
   letterSpacing: '$widest',
   textTransform: 'uppercase',
-  color: '$accentCopper',
+  color: '#CBD5E1',
 })
 
 const CharacterName = styled('h3', {
@@ -1142,6 +1142,8 @@ export default function App() {
           <HeroArtImage
             src={heroArt}
             alt="Port-Mystral sous la brume crépusculaire"
+            width="1024"
+            height="1024"
           />
         </HeroBackdrop>
 
@@ -1203,6 +1205,8 @@ export default function App() {
                 <BookCoverImage
                   src={heroArt}
                   alt="Couverture officielle du roman L'Eau qui Accroche — Port-Mystral"
+                  width="1024"
+                  height="1024"
                 />
                 <BookCoverBadge>
                   <BookCoverTag>ÉDITION OFFICIELLE — PORT&#8209;MYSTRAL</BookCoverTag>
