@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { styled } from './stitches.config.ts'
 import { Reader } from './components/Reader'
-import heroArt from './assets/port-mystral-art.jpg'
+import heroArt from './assets/port-mystral-art.webp'
 
 /* ==========================================================================
    GLOBAL LAYOUT & CONTAINERS
@@ -925,7 +925,7 @@ const FooterBrand = styled('div', {
   gap: '$3',
 })
 
-const FooterHeading = styled('h4', {
+const FooterHeading = styled('h3', {
   fontFamily: '$ui',
   fontSize: '$xs',
   fontWeight: '$bold',
@@ -1136,6 +1136,7 @@ export default function App() {
       </HeaderNav>
 
       {/* 2. HERO SECTION (Layout 2 colonnes Desktop) */}
+      <main>
       <HeroSectionWrapper id="hero" aria-labelledby="hero-title">
         <HeroBackdrop aria-hidden="true">
           <HeroArtImage
@@ -1399,6 +1400,7 @@ export default function App() {
         </SectionContainer>
       </CtaSectionWrapper>
       </div>
+      </main>
 
       {/* 7. FOOTER */}
       <FooterWrapper role="contentinfo">

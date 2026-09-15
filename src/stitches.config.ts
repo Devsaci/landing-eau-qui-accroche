@@ -15,7 +15,7 @@ export const {
       bgPrimary: '#0F172A',       // Bleu Ardoise / Granit
       bgOcean: '#0E3A36',         // Vert Océan Profond
       textPrimary: '#F8FAFC',     // Blanc Écume / Sel
-      textMuted: '#64748B',       // Gris Zinc / Brume
+      textMuted: '#94A3B8',       // Gris Zinc / Brume (contrast AA)
       accentCopper: '#F97316',    // Orange Cuivre / 15 Hz
       borderSubtle: 'rgba(100, 116, 139, 0.25)',
       cardGlass: 'rgba(15, 23, 42, 0.75)',

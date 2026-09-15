@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://landing-eau-qui-accroche.pages.dev/sitemap.xml
